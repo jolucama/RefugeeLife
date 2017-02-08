@@ -1,0 +1,18 @@
+web:
+  build: .
+  ports:
+    - "80:80"
+  links:
+    - db
+  volumes:
+    - ./:/var/www/local.refugeelife
+db:
+  image: "mysql:5"
+  ports:
+    - "3306:3306"
+  volumes:
+    - ../.refugeelifeDocker/etc/mysql/conf.d:/etc/mysql/conf.d
+    - ../.refugeelifeDocker/var/lib/mysql:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: RefugeeLife
