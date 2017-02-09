@@ -26,8 +26,9 @@ framework:
     trusted_proxies: ~
     session:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id:  session.handler.native_file
-        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+        handler_id:  session.handler.pdo
+        cookie_lifetime: 86400
+        gc_maxlifetime: 18000
     fragments:       ~
     http_method_override: true
     assets: ~
@@ -68,3 +69,11 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"

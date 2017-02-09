@@ -20,6 +20,19 @@ ADD cms.refugeelife.com.conf /etc/apache2/sites-available/cms.refugeelife.com.co
 RUN a2dissite 000-default.conf
 RUN a2ensite cms.refugeelife.com.conf
 
+# Install Serveral extra tools
+RUN apt-get -y install
+    curl \
+    composer \
+    nodejs \
+    npm \
+    imagemagick \
+    vim \
+    git \
+    wget \
+    zip \
+    unzip
+
 # Install php7
 RUN apt-get -y install libapache2-mod-php7.0 \
     php7.0 \
@@ -28,17 +41,14 @@ RUN apt-get -y install libapache2-mod-php7.0 \
     php7.0-mysql \
     php-apcu \
     php-pear \
-    curl \
     php7.0-dev \
     php7.0-json \
     php7.0-curl \
     php7.0-intl \
+    php7.0-zip \
     php-xml \
     php5.6-xml \
     php7.0-xml
-
-# Install Serveral extra tools
-RUN apt-get -y install composer nodejs npm imagemagick vim git wget
 
 RUN a2enmod headers
 RUN a2enmod rewrite
