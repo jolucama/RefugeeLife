@@ -97,12 +97,6 @@ class RefugeeStory
     protected $isGoalAchieved = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="Organization")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id")
-     */
-    protected $organization;
-
-    /**
      * Many Stories have many categories.
      *
      * @var ArrayCollection

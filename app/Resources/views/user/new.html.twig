@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- page content -->
+    <div role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>New User</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            {{ form_start(form, {'attr' : {'class': 'form-horizontal form-label-left', 'novalidate': 'novalidate'}}) }}
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nickname <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ form_errors(form.username) }}
+                                        {{ form_widget(form.username, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'pattern':''}}) }}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">First Name <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ form_errors(form.firstName) }}
+                                        {{ form_widget(form.firstName, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'placeholder':'Jose Luis'}}) }}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Last Name <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ form_errors(form.lastName) }}
+                                        {{ form_widget(form.lastName, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'placeholder':'Cardosa'}}) }}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ form_errors(form.email) }}
+                                        {{ form_widget(form.email, {'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label for="password" class="control-label col-md-3">Password</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ form_errors(form.plainPassword.first) }}
+                                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label for="password" class="control-label col-md-3">Repeat Password</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ form_errors(form.plainPassword.second) }}
+                                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">Telephone Number <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ form_errors(form.phoneNumber) }}
+                                        {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control col-md-7 col-xs-12', 'data-validate-length-range':'8,20'}}) }}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enabled">Enabled:</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                            {{ form_errors(form.enabled) }}
+                                            {{ form_widget(form.enabled, {'attr': {'class': 'js-switch', 'checked':''}}) }}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="organitation">Organization</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ form_errors(form.organization) }}
+                                        {{ form_widget(form.organization, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <button id="send" type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}

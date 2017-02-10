@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="{{ path('dashboard') }}" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella</span></a>
+            <a href="{{ path('dashboard') }}" class="site_title"><i class="fa fa-paw"></i> <span>Refugee Life</span></a>
         </div>
 
         <div class="clearfix"></div>
@@ -25,30 +25,20 @@
             <div class="menu_section">
                 <h3>Menu</h3>
                 <ul class="nav side-menu">
-                    <li><a href="{{ path('dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
-                    <li class=""><a><i class="fa fa-calendar"></i> Outlook <span class="fa fa-chevron-down"></span></a>
+                    <li class=""><a><i class="fa fa-calendar"></i> Users <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none;">
-                            <li><a href="{{ path('app_calendar') }}">Calendar</a></li>
-                            <li><a href="{{ path('app_contacts') }}">Contacts</a></li>
+                            <li><a href="{{ path('user_new') }}">New</a></li>
+                            <li><a href="{{ path('user_index') }}">List</a></li>
                         </ul>
                     </li>
-
+                    <li class=""><a><i class="fa fa-calendar"></i> Organization <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none;">
+                            <li><a href="{{ path('organization_new') }}">New</a></li>
+                            <li><a href="{{ path('organization_index') }}">List</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
-
-            <div class="menu_section">
-                <h3>Developer</h3>
-                <ul class="nav side-menu">
-                    <li>
-                        <a><i class="fa fa-book"></i> Documentation <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a class="symfony-docs" href="http://symfony.com/doc/current/index.html">Symfony</a></li>
-                        </ul>
-                    </li> 
-                    <li><a href="{{ path('app_gentelella', {page: 'index'}) }}"><i class="fa fa-search"></i> Template</a></li>               
-                </ul>                    
-            </div>
-            
         </div>
         <!-- /sidebar menu -->
 

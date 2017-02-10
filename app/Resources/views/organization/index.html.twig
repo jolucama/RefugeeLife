@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- page content -->
+    <div role="main">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Organizations</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!-- start project list -->
+                        <table class="table table-striped projects">
+                            <thead>
+                            <tr>
+                                <th style="width: 1%">#</th>
+                                <th style="width: 20%">Name</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Zipcode</th>
+                                <th>Phonenumber</th>
+                                <th>Country</th>
+                                <th style="width: 20%">#Edit</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for organization in organizations %}
+                                <tr>
+                                    <td>{{ organization.id }}</td>
+                                    <td>
+                                        <a>{{ organization.name }}</a>
+                                    </td>
+                                    <td>
+                                        <a>{{ organization.email }}</a>
+                                    </td>
+                                    <td>
+                                        <a>{{ organization.address }}</a>
+                                    </td>
+                                    <td>
+                                        <a>{{ organization.zipCode }}</a>
+                                    </td>
+                                    <td>
+                                        <a>{{ organization.phoneNumber }}</a>
+                                    </td>
+                                    <td>
+                                        <a>{{ organization.country }}</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path("organization_edit", {"id" : organization.id}) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                        <a href="{{ path("organization_delete", {"id" : organization.id}) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- end project list -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
+{% endblock %}
