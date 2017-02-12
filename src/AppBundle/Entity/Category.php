@@ -40,4 +40,9 @@ class Category
     {
         $this->refugeeStories = new ArrayCollection();
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

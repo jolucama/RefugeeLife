@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Refugeestory</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ refugeeStory.id }}</td>
+            </tr>
+            <tr>
+                <th>Story</th>
+                <td>{{ refugeeStory.story }}</td>
+            </tr>
+            <tr>
+                <th>Protagonist</th>
+                <td>{{ refugeeStory.protagonist }}</td>
+            </tr>
+            <tr>
+                <th>Protagonistemail</th>
+                <td>{{ refugeeStory.protagonistEmail }}</td>
+            </tr>
+            <tr>
+                <th>Protagonistphone</th>
+                <td>{{ refugeeStory.protagonistPhone }}</td>
+            </tr>
+            <tr>
+                <th>Comingfromcountry</th>
+                <td>{{ refugeeStory.comingFromCountry }}</td>
+            </tr>
+            <tr>
+                <th>Refugeeincountry</th>
+                <td>{{ refugeeStory.refugeeInCountry }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ refugeeStory.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ refugeeStory.longitude }}</td>
+            </tr>
+            <tr>
+                <th>Isdeathstory</th>
+                <td>{% if refugeeStory.isDeathStory %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Goal</th>
+                <td>{{ refugeeStory.goal }}</td>
+            </tr>
+            <tr>
+                <th>Achievedgoalpercentage</th>
+                <td>{{ refugeeStory.achievedGoalPercentage }}</td>
+            </tr>
+            <tr>
+                <th>Isgoalachieved</th>
+                <td>{% if refugeeStory.isGoalAchieved %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if refugeeStory.createdAt %}{{ refugeeStory.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if refugeeStory.updatedAt %}{{ refugeeStory.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('refugeestory_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('refugeestory_edit', { 'id': refugeeStory.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

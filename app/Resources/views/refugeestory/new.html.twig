@@ -1,0 +1,493 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- NProgress -->
+    <link href="{{ asset('assets/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('assets/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="{{ asset('assets/vendors/google-code-prettify/bin/prettify.min.css') }}" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="{{ asset('assets/vendors/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+    <!-- starrr -->
+    <link href="{{ asset('assets/vendors/starrr/dist/starrr.css') }}" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="{{ asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+
+    <style>
+        #map {
+            height: 350px;
+        }
+        .controls {
+            margin-top: 10px;
+            border: 1px solid transparent;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 32px;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 300px;
+        }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+
+        .pac-container {
+            font-family: Roboto;
+        }
+
+        #type-selector {
+            color: #fff;
+            background-color: #4d90fe;
+            padding: 5px 11px 0px 11px;
+        }
+
+        #type-selector label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        #target {
+            width: 345px;
+        }
+
+        #appbundle_refugeestory_achievedGoalPercentage {
+            width: 90px!important;
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <div role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>New Story</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+
+                {{ form_start(form, {'attr' : {'novalidate': ''}}) }}
+                {# Story #}
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Story</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li style="float: right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        {{ form_errors(form.story) }}
+                        <div class="x_content">
+                            <div id="alerts"></div>
+                            <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="fa fa-font"></i><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                    </ul>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a data-edit="fontSize 5">
+                                                <p style="font-size:17px">Huge</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-edit="fontSize 3">
+                                                <p style="font-size:14px">Normal</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-edit="fontSize 1">
+                                                <p style="font-size:11px">Small</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+                                    <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+                                    <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+                                    <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
+                                    <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
+                                    <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-dedent"></i></a>
+                                    <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+                                    <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+                                    <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+                                    <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
+                                    <div class="dropdown-menu input-append">
+                                        <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+                                        <button class="btn" type="button">Add</button>
+                                    </div>
+                                    <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
+                                    <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                                    <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+                                </div>
+                            </div>
+
+                            <div id="editor-one" class="editor-wrapper story"></div>
+                            {{ form_widget(form.story, {'attr': {'class': 'form-control', 'style': 'display:none;'}}) }}
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="item form-group">
+                                <label class="" for="name">Protagonist <span class="required">*</span>
+                                </label>
+                                    {{ form_errors(form.protagonist) }}
+                                    {{ form_widget(form.protagonist, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="item form-group">
+                                <label class="" for="email">Email
+                                </label>
+                                    {{ form_errors(form.protagonistEmail) }}
+                                    {{ form_widget(form.protagonistEmail, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="item form-group">
+                                <label class="" for="telephone">Telephone Number
+                                </label>
+                                    {{ form_errors(form.protagonistPhone) }}
+                                    {{ form_widget(form.protagonistPhone, {'attr': {'class': 'form-control', 'data-validate-length-range':'8,20'}}) }}
+                            </div>
+                            <div class="item form-group">
+                                <label class="" for="coming from">Coming from Country</label>
+                                    {{ form_errors(form.comingFromCountry) }}
+                                    {{ form_widget(form.comingFromCountry, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="item form-group">
+                                <label class="" for="organitation">Now In Country</label>
+                                    {{ form_errors(form.refugeeInCountry) }}
+                                    {{ form_widget(form.refugeeInCountry, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <label class="" for="name">Current Location</label>
+                            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                            <div id="map"></div>
+
+                            {{ form_widget(form.latitude) }}
+                            {{ form_widget(form.longitude) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Goal / Requirement</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li style="float: right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        {{ form_errors(form.goal) }}
+                        <div class="x_content">
+                            <div id="alerts"></div>
+                            <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="fa fa-font"></i><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                    </ul>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a data-edit="fontSize 5">
+                                                <p style="font-size:17px">Huge</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-edit="fontSize 3">
+                                                <p style="font-size:14px">Normal</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-edit="fontSize 1">
+                                                <p style="font-size:11px">Small</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+                                    <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+                                    <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+                                    <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
+                                    <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
+                                    <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-dedent"></i></a>
+                                    <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+                                    <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+                                    <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+                                    <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
+                                    <div class="dropdown-menu input-append">
+                                        <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+                                        <button class="btn" type="button">Add</button>
+                                    </div>
+                                    <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
+                                    <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                                </div>
+
+                                <div class="btn-group">
+                                    <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                                    <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+                                </div>
+                            </div>
+
+                            <div id="editor-one" class="editor-wrapper goal"></div>
+                            {{ form_widget(form.goal, {'attr': {'class': 'form-control', 'style': 'display:none;'}}) }}
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="item form-group">
+                                <label class="" for="achieved">Goal Achieved:</label>
+                                <div class="">
+                                    {{ form_errors(form.isGoalAchieved) }}
+                                    {{ form_widget(form.isGoalAchieved, {'attr': {'class': 'js-switch'}}) }}
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="" for="achieved">Progress:</label>
+                                <div class="">
+                                    {{ form_errors(form.achievedGoalPercentage) }}
+                                    {{ form_widget(form.achievedGoalPercentage,
+                                    {'attr':
+                                        {
+                                            'class': 'knob',
+                                            'data-width': '140',
+                                            'data-height': '140',
+                                            'data-min': '0',
+                                            'data-displayPrevious': 'true',
+                                            'data-fgColor': '#26B99A'
+                                        }
+                                    }) }}
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="" for="achieved">Death's Story:</label>
+                                <div class="">
+                                    {{ form_errors(form.isDeathStory) }}
+                                    {{ form_widget(form.isDeathStory, {'attr': {'class': 'js-switch'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Categories</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    {{ form_errors(form.categories) }}
+                                    {{ form_widget(form.categories, {'attr': {'class': 'select2_multiple form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <button id="send" type="submit" class="btn btn-success">Save story</button>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <!-- bootstrap-wysiwyg -->
+    <script src="{{ asset('assets/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/jquery.hotkeys/jquery.hotkeys.js') }}"></script>
+    <script src="{{ asset('assets/vendors/google-code-prettify/src/prettify.js') }}"></script>
+    <!-- jQuery Tags Input -->
+    <script src="{{ asset('assets/vendors/jquery.tagsinput/src/jquery.tagsinput.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ asset('assets/vendors/select2/dist/js/select2.full.min.js') }}"></script>
+    <!-- Parsley -->
+    <script src="{{ asset('assets/vendors/parsleyjs/dist/parsley.min.js') }}"></script>
+    <!-- Autosize -->
+    <script src="{{ asset('assets/vendors/autosize/dist/autosize.min.js') }}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{{ asset('assets/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
+    <!-- starrr -->
+    <script src="{{ asset('assets/vendors/starrr/dist/starrr.js') }}"></script>
+    <!-- jQuery Knob -->
+    <script src="{{ asset('assets/vendors/jquery-knob/dist/jquery.knob.min.js') }}"></script>
+
+    <script>
+        $('form').on('keyup keypress', function(e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode === 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var submit = true;
+            $("#appbundle_refugeestory_story").html($("div.editor-wrapper.story").html());
+            $("#appbundle_refugeestory_goal").html($("div.editor-wrapper.goal").html());
+
+            if (submit)
+                this.submit();
+        });
+
+        function initAutocomplete() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -33.8688, lng: 151.2195},
+                zoom: 13,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function() {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            var markers = [];
+            // [START region_getplaces]
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                // Clear out the old markers.
+                markers.forEach(function(marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function(place) {
+                    var icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25)
+                    };
+
+                    // Create a marker for each place.
+                    markers.push(new google.maps.Marker({
+                        map: map,
+                        icon: icon,
+                        title: place.name,
+                        position: place.geometry.location
+                    }));
+
+                    $("#appbundle_refugeestory_latitude").val(place.geometry.location.lat());
+                    $("#appbundle_refugeestory_longitude").val(place.geometry.location.lng());
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+            // [END region_getplaces]
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNVZ4UAMIOmAbSd8IWGgpmtK7HDDjTYUA&libraries=places&callback=initAutocomplete" async defer></script>
+{% endblock javascripts %}
