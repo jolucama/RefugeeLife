@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- page content -->
+    <div role="main">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Categories</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!-- start project list -->
+                        <table class="table table-striped projects">
+                            <thead>
+                            <tr>
+                                <th style="width: 1%">#</th>
+                                <th style="width: 20%">Name</th>
+                                <th style="width: 20%">#Edit</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for category in categories %}
+                                <tr>
+                                    <td>{{ category.id }}</td>
+                                    <td>
+                                        <a>{{ category.name }}</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path("category_edit", {"id" : category.id}) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                        <a href="{{ path("category_delete", {"id" : category.id}) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- end project list -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
+{% endblock %}

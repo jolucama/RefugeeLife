@@ -116,6 +116,22 @@ class RefugeeStory
     protected $categories;
 
     /**
+     * @var User
+     *
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     */
+    protected $user;
+
+    /**
+     * @var Organization
+     *
+     * @ORM\OneToOne(targetEntity="Organization")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=true)
+     */
+    protected $organization;
+
+    /**
      * @var \DateTime $createdAt
      *
      * @ORM\Column(type="datetime")
@@ -339,6 +355,38 @@ class RefugeeStory
     }
 
     /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
+    }
+
+    /**
+     * @param Organization $organization
+     */
+    public function setOrganization($organization)
+    {
+        $this->organization = $organization;
+    }
+
+    /**
      * Add a new category to the collection
      *
      * @param Category $category
@@ -410,5 +458,27 @@ class RefugeeStory
         if ($this->getCreatedAt() == null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+    
+    public function __sleep()
+    {
+        return [
+            'id' => $this->id,
+            'story' => $this->story,
+            'protagonist' => $this->protagonist,
+            'protagonistEmail' => $this->protagonistEmail,
+            'protagonistPhone' => $this->protagonistPhone,
+            'comingFromCountry' => $this->comingFromCountry,
+            'refugeeInCountry' => $this->refugeeInCountry,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
+            'deathStory' => $this->isDeathStory,
+            'achievedGoalPercentage' => $this->achievedGoalPercentage,
+            'achievedGoal' => $this->isGoalAchieved,
+            //'tags' => $this->getCategories(),
+            'user' => $this->user->__sleep(),
+            'createdAt' => $this->createdAt,
+            'updatedAt' => $this->updatedAt
+        ];
     }
 }

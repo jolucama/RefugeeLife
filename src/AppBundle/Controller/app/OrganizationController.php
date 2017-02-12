@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\app;
 
 use AppBundle\Entity\Organization;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

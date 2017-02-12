@@ -27,6 +27,7 @@ class RefugeeStoryType extends AbstractType
             ->add('goal')
             ->add('achievedGoalPercentage')
             ->add('isGoalAchieved')
+            ->add('organization')
             ->add('categories')        
         ;
     }

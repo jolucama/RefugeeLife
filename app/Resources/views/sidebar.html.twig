@@ -25,22 +25,28 @@
             <div class="menu_section">
                 <h3>Menu</h3>
                 <ul class="nav side-menu">
-                    <li class=""><a><i class="fa fa-calendar"></i> Users <span class="fa fa-chevron-down"></span></a>
+                    <li class=""><a><i class="fa fa-laptop"></i> Users <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none;">
                             <li><a href="{{ path('user_new') }}">New</a></li>
                             <li><a href="{{ path('user_index') }}">List</a></li>
                         </ul>
                     </li>
-                    <li class=""><a><i class="fa fa-calendar"></i> Organization <span class="fa fa-chevron-down"></span></a>
+                    <li class=""><a><i class="fa fa-sitemap"></i> Organization <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none;">
                             <li><a href="{{ path('organization_new') }}">New</a></li>
                             <li><a href="{{ path('organization_index') }}">List</a></li>
                         </ul>
                     </li>
-                    <li class=""><a><i class="fa fa-calendar"></i> Stories <span class="fa fa-chevron-down"></span></a>
+                    <li class=""><a><i class="fa fa-edit"></i> Stories <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none;">
                             <li><a href="{{ path('refugeestory_new') }}">New</a></li>
                             <li><a href="{{ path('refugeestory_index') }}">List</a></li>
+                        </ul>
+                    </li>
+                    <li class=""><a><i class="fa fa-table"></i> Categories <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none;">
+                            <li><a href="{{ path('category_new') }}">New</a></li>
+                            <li><a href="{{ path('category_index') }}">List</a></li>
                         </ul>
                     </li>
                 </ul>

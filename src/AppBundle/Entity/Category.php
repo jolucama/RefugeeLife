@@ -22,7 +22,7 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=256)
+     * @ORM\Column(type="string", length=256, nullable=false, unique=true)
      */
     protected $name;
 
@@ -39,6 +39,54 @@ class Category
     public function __construct()
     {
         $this->refugeeStories = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRefugeeStories()
+    {
+        return $this->refugeeStories;
+    }
+
+    /**
+     * @param ArrayCollection $refugeeStories
+     */
+    public function setRefugeeStories($refugeeStories)
+    {
+        $this->refugeeStories = $refugeeStories;
     }
 
     public function __toString()

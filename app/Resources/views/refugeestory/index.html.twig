@@ -1,65 +1,75 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Refugeestories list</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Story</th>
-                <th>Protagonist</th>
-                <th>Protagonistemail</th>
-                <th>Protagonistphone</th>
-                <th>Comingfromcountry</th>
-                <th>Refugeeincountry</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Isdeathstory</th>
-                <th>Goal</th>
-                <th>Achievedgoalpercentage</th>
-                <th>Isgoalachieved</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for refugeeStory in refugeeStories %}
-            <tr>
-                <td><a href="{{ path('refugeestory_show', { 'id': refugeeStory.id }) }}">{{ refugeeStory.id }}</a></td>
-                <td>{{ refugeeStory.story }}</td>
-                <td>{{ refugeeStory.protagonist }}</td>
-                <td>{{ refugeeStory.protagonistEmail }}</td>
-                <td>{{ refugeeStory.protagonistPhone }}</td>
-                <td>{{ refugeeStory.comingFromCountry }}</td>
-                <td>{{ refugeeStory.refugeeInCountry }}</td>
-                <td>{{ refugeeStory.latitude }}</td>
-                <td>{{ refugeeStory.longitude }}</td>
-                <td>{% if refugeeStory.isDeathStory %}Yes{% else %}No{% endif %}</td>
-                <td>{{ refugeeStory.goal }}</td>
-                <td>{{ refugeeStory.achievedGoalPercentage }}</td>
-                <td>{% if refugeeStory.isGoalAchieved %}Yes{% else %}No{% endif %}</td>
-                <td>{% if refugeeStory.createdAt %}{{ refugeeStory.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if refugeeStory.updatedAt %}{{ refugeeStory.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('refugeestory_show', { 'id': refugeeStory.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('refugeestory_edit', { 'id': refugeeStory.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <!-- page content -->
+    <div role="main">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Stories</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!-- start project list -->
+                        <table class="table table-striped projects">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Story</th>
+                                <th>Protagonist</th>
+                                <th>From country</th>
+                                <th>In country</th>
+                                <th>Death Story</th>
+                                <th>Goal</th>
+                                <th>Achieved</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for refugeeStory in refugeeStories %}
+                                <tr>
+                                    <td>{{ refugeeStory.id }}</td>
+                                    <td>{{ refugeeStory.story | truncate(50) | raw }}</td>
+                                    <td>{{ refugeeStory.protagonist }}</td>
+                                    <td>{{ refugeeStory.comingFromCountry }}</td>
+                                    <td>{{ refugeeStory.refugeeInCountry }}</td>
+                                    <td>
+                                        {% if refugeeStory.isDeathStory %}
+                                            <button type="button" class="btn btn-danger btn-xs">Yes</button>
+                                        {% else %}
+                                            <button type="button" class="btn btn-success btn-xs">No</button>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ refugeeStory.goal | truncate(50) | raw }}</td>
+                                    <td>
+                                        {% set class = "" %}
+                                        {% if refugeeStory.achievedGoalPercentage < 40 %}
+                                            {% set class = "btn-danger" %}
+                                        {% elseif refugeeStory.achievedGoalPercentage < 80 %}
+                                            {% set class = "btn-info" %}
+                                        {% else %}
+                                            {% set class = "btn-success" %}
+                                        {% endif %}
+                                        <button type="button" class="btn {{ class }} btn-xs">{{ refugeeStory.achievedGoalPercentage }}%</button>
+                                    <td>{% if refugeeStory.createdAt %}{{ refugeeStory.createdAt|date('Y-m-d H:i') }}{% endif %}</td>
+                                    <td>
+                                        <a href="{{ path("refugeestory_edit", {"id" : refugeeStory.id}) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                        <a href="{{ path("refugeestory_delete", {"id" : refugeeStory.id}) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- end project list -->
 
-    <ul>
-        <li>
-            <a href="{{ path('refugeestory_new') }}">Create a new refugeeStory</a>
-        </li>
-    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
 {% endblock %}

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\app;
 
 use AppBundle\Entity\RefugeeStory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -45,6 +45,9 @@ class RefugeeStoryController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            $refugeeStory->setUser($user);
             $em->persist($refugeeStory);
             $em->flush($refugeeStory);
 
@@ -54,22 +57,6 @@ class RefugeeStoryController extends Controller
         return $this->render('refugeestory/new.html.twig', array(
             'refugeeStory' => $refugeeStory,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a refugeeStory entity.
-     *
-     * @Route("/{id}", name="refugeestory_show")
-     * @Method("GET")
-     */
-    public function showAction(RefugeeStory $refugeeStory)
-    {
-        $deleteForm = $this->createDeleteForm($refugeeStory);
-
-        return $this->render('refugeestory/show.html.twig', array(
-            'refugeeStory' => $refugeeStory,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -88,7 +75,7 @@ class RefugeeStoryController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('refugeestory_edit', array('id' => $refugeeStory->getId()));
+            return $this->redirectToRoute('refugeestory_index');
         }
 
         return $this->render('refugeestory/edit.html.twig', array(

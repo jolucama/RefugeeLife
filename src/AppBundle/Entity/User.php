@@ -111,4 +111,16 @@ class User extends BaseUser
     {
         $this->organization = $organization;
     }
+
+    public function __sleep()
+    {
+        return [
+            'id' => $this->id,
+            'firstName' => $this->firstName,
+            'secondName' => $this->lastName,
+            'email' => $this->email,
+            'phoneNumber' => $this->phoneNumber,
+            'organization' => $this->organization,
+        ];
+    }
 }
